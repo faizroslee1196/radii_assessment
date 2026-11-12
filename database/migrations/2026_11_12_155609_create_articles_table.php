@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('permalink');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('author');
-            $table->integer('status');
+            $table->string('status');
             $table->timestamps();
         });
     }
