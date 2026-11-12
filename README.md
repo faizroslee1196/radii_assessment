@@ -1,41 +1,40 @@
-# Candidate Technical Evaluation - Star Media Group
+# Radii Assessment
 
-## Time Limit: 60 - 90 Minutes
+A Laravel application using SQLite, Blade, and Bootstrap.
 
-### Prerequisites
-- PHP 8.5+ installed
-- Composer 2.x installed
+## Requirements
 
-### Quick Setup Instructions
-1. Clone this repository to your local machine.
-2. Run `composer install`
-3. Copy the environment file: `cp .env.example .env`
-4. Generate app key: `php artisan key:generate`
-5. Create SQLite file if needed (see database/ folder) and run migrations: `php artisan migrate`
-6. Start dev server: `php artisan serve`
+- PHP 8.5+
+- Composer 2.x
+- PHP PDO SQLite and SQLite3 extensions
 
-### Tasks
-#### 1. **Migrations & Models:** Create the Article and Category models with standard Eloquent relationships (a Category has many Articles).
-- `Category` Model Fields:
-  - `id` (primary key)
-  - `name` (string)
-  - `Article` Model Fields:
-    - `title` (string)
-    - `summary` (string)
-    - `body` (text)
-    - `published_at` (timestamp, nullable)
-    - `permalink` (string)
-    - `category_id` (foreign key referencing `categories`)
-    - _(Optional)_: Add 1 or 2 extra properties you feel are essential for a news portal article (e.g., `status`, `thumbnail_url`, `author`).
-#### 2. **Factories & Database Seeding**
-- Create an `ArticleFactory` using Faker for titles, summary, and body content.
-- Configure `DatabaseSeeder.php` so running `php artisan db:seed` automatically populates the database with at least 5 categories and 20 articles.
-#### 3. **Controller & API Endpoint:** Create a GET controller method returning articles formatted as JSON. Prevent N+1 database queries using eager loading (`with`).
-#### 4. **Frontend Integration:**
-- **Article List View:** Render a list of articles using standard Blade views styled with Bootstrap (or Livewire).
-- **Search Filter:** Implement a simple real-time JavaScript (or Livewire) search filter to filter articles by title on the list page.
-- **Article Detail Page:** Create a single article view page that displays the full title, body, category, and published date when an article from the list is clicked.
+## Setup
 
-### Submission Guidelines
-- Commit code cleanly with clear commit messages.
-- Push your completed work back to your repository and share the repository link with us.
+1. Clone or extract the project.
+2. Run `composer install`.
+3. Copy `.env.example` to `.env`.
+4. Set `DB_CONNECTION=sqlite` and remove any `DB_DATABASE` setting.
+5. Create an empty file at `database/database.sqlite`.
+6. Run:
+
+   ```sh
+   php artisan key:generate
+   php artisan config:clear
+   php artisan migrate --seed
+   php artisan serve
+   ```
+
+## Features
+
+- Five categories and twenty Faker generated articles
+- Article list with title search
+- Article detail page
+- JSON API
+
+## Routes
+
+- `/` — Article list
+- `/articles/{article}` — Article detail by ID
+- `/api/articles` — Articles as JSON
+
+Bootstrap loads from a CDN and requires an internet connection.
